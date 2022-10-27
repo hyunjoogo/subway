@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type TableType = {
-  arrivalList: Item[]
+  arrivalList: Item[] | [];
 }
 
 export type Item = {
@@ -36,8 +36,6 @@ export type Item = {
 }
 const Table = ({arrivalList}: TableType): React.ReactElement => {
   console.log(arrivalList)
-  const obj: string[] = ['statnId', 'statnNm', 'arvlCd', 'arvlMsg2', 'arvlMsg3']
-  console.log(obj)
   return (
     <table>
       <caption>

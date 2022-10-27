@@ -1,15 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {xmlToJson} from "./xmlToJson";
-import Table, {Item} from "./Table";
+import Table, {Item} from "./component/Table";
+import TimeLine from './view/timeLine/TimeLine';
 
-interface Person {
-  name: string;
-  error: boolean;
-}
-
-function App() {
+function App() : React.ReactElement{
   const [arrivalList, setArrivalList] = useState<Item[]>([]);
 
   useEffect(() => {
@@ -17,23 +11,25 @@ function App() {
   }, [])
 
   const getXMLfromAPI = async () => {
-    const url = "http://swopenapi.seoul.go.kr/api/subway/smaple/json/realtimeStationArrival/0/5/오목교(목동운동장앞)";
-    const response = await fetch(url);
+    const apiKey = process.env.REACT_APP_SEOUL_SUBWAY_API_KEY;
+    const baseURL = `http://swopenapi.seoul.go.kr/api/subway/${apiKey}/json/realtimeStationArrival/0/10/`
+    const stationName = "오목교(목동운동장앞)"
+
+    const response = await fetch(baseURL + stationName);
     const res = await response.json();
 
     if (!response.ok) {
       throw Error("...");
     }
     console.log(res, res.realtimeArrivalList);
-    setArrivalList(res.realtimeArrivalList);
-
+    setArrivalList(res.realtimeArrivalList || []);
   };
 
   return (
     <>
       <div className="App">
+        <TimeLine arrivalList={arrivalList}/>
         <Table arrivalList={arrivalList}/>
-
       </div>
     </>
 
