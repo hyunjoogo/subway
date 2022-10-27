@@ -1,46 +1,11 @@
 import React from 'react';
 
-export type TableType = {
-  arrivalList: Item[] | [];
-  getXMLfromAPI: () => void;
-}
-
-type TableTestType = {
-  arrivalList: Item[] | [];
-}
-
-export type Item = {
-  "beginRow": null,
-  "endRow": null,
-  "curPage": null,
-  "pageRow": null,
-  "totalCount": number,
-  "rowNum": number,
-  "selectedCount": number,
-  "subwayId": string,
-  "subwayNm": null,
-  "trainCo": null,
-  "btrainSttus": null,
-  "updnLine": string,
-  "trainLineNm": string,
-  "statnFid": string,
-  "statnTid": string,
-  "statnId": string,
-  "statnNm": string,
-  "ordkey": string,
-  "subwayList": string,
-  "statnList": string,
-  "barvlDt": string,
-  "btrainNo": string,
-  "bstatnId": string,
-  "bstatnNm": string,
-  "recptnDt": string,
-  "arvlMsg2": string,
-  "arvlMsg3": string,
-  "arvlCd": string
-}
-const Table = ({arrivalList}: TableTestType): React.ReactElement => {
-  console.log(arrivalList)
+const Table = ({arrivalList = []})=> {
+  arrivalList = arrivalList.filter((value, index) => {
+    if (value.subwayId === "1009") {
+      return value
+    }
+  })
   return (
     <table>
       <caption>

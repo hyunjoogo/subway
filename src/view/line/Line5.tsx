@@ -1,38 +1,38 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import styled from "styled-components";
-import {TableType} from "../../component/Table";
 import {convertMinuteAndSecond, displayDate} from "../../utils/displayDate";
+import * as Apis from "../../apis/Apis";
+import {RealtimeArrivalList} from "../../apis/Apis";
 
-
-const TimeLine = ({arrivalList, getXMLfromAPI}: TableType): React.ReactElement => {
-  const list = arrivalList.filter((value, index) => {
-    if (value.updnLine === "하행") {
-      return value
-    }
-  })
-
-  // let now = moment().format('hh:mm:ss');
+const Line5 = () => {
+  const [arrivalData, setArrivalData] = useState<RealtimeArrivalList[]>([]);
   let nowTime = displayDate();
+
+  const getArrivalData = async () => {
+    const {realtimeArrivalList} = await Apis.getArrivalList('오목교(목동운동장앞)')
+    if (realtimeArrivalList) {
+      setArrivalData(realtimeArrivalList);
+    }
+  }
 
   const statusCd = {
     0: "진입", 1: "도착", 2: "출발", 3: "전역출발", 4: "전역진입", 5: "전역도착", 99: "운행중",
   }
 
   return (
-    <TimeLineWrapper>
-      <p>회사 가는 길</p>
+    <StyledStation>
       <div className="title">
         <h2 className="station">
           <p className="lineNum">5</p>
-          <p className="stationName">오목교역</p>
+          <p className="stationName">오목교</p>
         </h2>
         <div className="updateTime_wrapper">
           <span className="updateTime">{nowTime}</span>
-          <button className="resetBtn" onClick={() => getXMLfromAPI()}>리셋</button>
+          <button className="resetBtn" onClick={getArrivalData}>리셋</button>
         </div>
       </div>
       <div>
-        {list.map((value, index) => {
+        {arrivalData.map((value, index) => {
           return (
             <Fragment key={index}>
               <div>열차 : {value.btrainNo}</div>
@@ -43,13 +43,13 @@ const TimeLine = ({arrivalList, getXMLfromAPI}: TableType): React.ReactElement =
           )
         })}
       </div>
-    </TimeLineWrapper>
+    </StyledStation>
   );
 };
 
-export default TimeLine;
+export default Line5;
 
-const TimeLineWrapper = styled.article`
+const StyledStation = styled.article`
   border: 1px solid black;
   padding: 1rem 2rem;
 
