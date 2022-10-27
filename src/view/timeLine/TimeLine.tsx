@@ -1,12 +1,10 @@
 import React, {Fragment} from 'react';
 import styled from "styled-components";
 import {TableType} from "../../component/Table";
-import moment from 'moment';
-import dayjs from "dayjs";
-import {convertMinuteAndSecond, displayDate, now} from "../../utils/displayDate";
+import {convertMinuteAndSecond, displayDate} from "../../utils/displayDate";
 
 
-const TimeLine = ({arrivalList}: TableType): React.ReactElement => {
+const TimeLine = ({arrivalList, getXMLfromAPI}: TableType): React.ReactElement => {
   const list = arrivalList.filter((value, index) => {
     if (value.updnLine === "하행") {
       return value
@@ -15,6 +13,10 @@ const TimeLine = ({arrivalList}: TableType): React.ReactElement => {
 
   // let now = moment().format('hh:mm:ss');
   let nowTime = displayDate();
+
+  const statusCd = {
+    0: "진입", 1: "도착", 2: "출발", 3: "전역출발", 4: "전역진입", 5: "전역도착", 99: "운행중",
+  }
 
   return (
     <TimeLineWrapper>
@@ -26,21 +28,21 @@ const TimeLine = ({arrivalList}: TableType): React.ReactElement => {
         </h2>
         <div className="updateTime_wrapper">
           <span className="updateTime">{nowTime}</span>
-          <button className="resetBtn">리셋</button>
+          <button className="resetBtn" onClick={() => getXMLfromAPI()}>리셋</button>
         </div>
       </div>
       <div>
         {list.map((value, index) => {
           return (
             <Fragment key={index}>
-              <div>{value.btrainNo} / {convertMinuteAndSecond(value.barvlDt)} / {displayDate(value.recptnDt)} 도착 예정</div>
+              <div>열차 : {value.btrainNo}</div>
+              <div>남은 시간 : {convertMinuteAndSecond(value.barvlDt)}</div>
+              <div>업데이트 : {displayDate(value.recptnDt)}</div>
+              <div>{value.arvlMsg2}</div>
             </Fragment>
           )
         })}
-        <div>05:47 열차번호 10분 00초 도착</div>
       </div>
-
-
     </TimeLineWrapper>
   );
 };

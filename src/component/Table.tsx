@@ -2,6 +2,11 @@ import React from 'react';
 
 export type TableType = {
   arrivalList: Item[] | [];
+  getXMLfromAPI: () => void;
+}
+
+type TableTestType = {
+  arrivalList: Item[] | [];
 }
 
 export type Item = {
@@ -34,7 +39,7 @@ export type Item = {
   "arvlMsg3": string,
   "arvlCd": string
 }
-const Table = ({arrivalList}: TableType): React.ReactElement => {
+const Table = ({arrivalList}: TableTestType): React.ReactElement => {
   console.log(arrivalList)
   return (
     <table>
@@ -75,7 +80,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>3</td>
         <td>trainLineNm</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.trainLineNm}</td>
         })}
         <td>
@@ -86,7 +91,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>5</td>
         <td>statnFid</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.statnFid}</td>
         })}
         <td>이전지하철역ID</td>
@@ -94,7 +99,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>6</td>
         <td>statnTid</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.statnTid}</td>
         })}
         <td>다음지하철역ID</td>
@@ -102,7 +107,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>7</td>
         <td>statnId</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.statnId}</td>
         })}
         <td>지하철역ID</td>
@@ -110,7 +115,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>8</td>
         <td>statnNm</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.statnNm}</td>
         })}
         <td>지하철역명</td>
@@ -118,7 +123,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>10</td>
         <td>ordkey</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.ordkey}</td>
         })}
         <td>
@@ -130,7 +135,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>11</td>
         <td>subwayList</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.subwayList}</td>
         })}
         <td>
@@ -141,7 +146,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>12</td>
         <td>statnList</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.statnList}</td>
         })}
         <td>
@@ -152,7 +157,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>13</td>
         <td>btrainSttus</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.btrainSttus}</td>
         })}
         <td>
@@ -163,7 +168,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>14</td>
         <td>barvlDt</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.barvlDt}</td>
         })}
         <td>
@@ -174,7 +179,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>15</td>
         <td>btrainNo</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.btrainNo}</td>
         })}
         <td>
@@ -185,7 +190,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>16</td>
         <td>bstatnId</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.bstatnId}</td>
         })}
         <td>종착지하철역ID</td>
@@ -193,7 +198,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>17</td>
         <td>bstatnNm</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.bstatnNm}</td>
         })}
         <td>종착지하철역명</td>
@@ -201,7 +206,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>18</td>
         <td>recptnDt</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.recptnDt}</td>
         })}
         <td>열차도착정보를 생성한 시각</td>
@@ -209,7 +214,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>19</td>
         <td>arvlMsg2</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.arvlMsg2}</td>
         })}
         <td>
@@ -220,7 +225,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>20</td>
         <td>arvlMsg3</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.arvlMsg3}</td>
         })}
         <td>
@@ -231,7 +236,7 @@ const Table = ({arrivalList}: TableType): React.ReactElement => {
       <tr>
         <td>21</td>
         <td>arvlCd</td>
-                {arrivalList.map((item, index) => {
+        {arrivalList.map((item, index) => {
           return <td key={index}>{item.arvlCd}</td>
         })}
         <td>
