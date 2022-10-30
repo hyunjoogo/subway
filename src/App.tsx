@@ -1,17 +1,20 @@
 import React from 'react';
 import './App.css';
-import Line5 from "./view/line/Line5";
+import Line9 from "./view/line/Line9";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import List from './List';
+import StationList from "./view/stationList/StationList";
 
 function App(): React.ReactElement {
 
   return (
-    <>
-      <h1>뛸까? 말까?</h1>
-      <div className="App">
-        <Line5/>
-      </div>
-      {/*<Table arrivalList={arrivalList}/>*/}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Line9/>}/>
+        <Route path="/home" element={<List/>}/>
+        <Route path="/station" element={<StationList/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

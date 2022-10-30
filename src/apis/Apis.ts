@@ -1,6 +1,4 @@
 // API 요청 결과 인터페이스 정의
-import {dummy} from "../App";
-
 export type RealtimeStationArrival = {
   errorMessage: ErrorMessage,
   realtimeArrivalList: RealtimeArrivalList[],
@@ -43,13 +41,18 @@ export type RealtimeArrivalList = {
   "recptnDt": string,
   "arvlMsg2": string,
   "arvlMsg3": string,
-  "arvlCd": string
+  "arvlCd": string,
+  "isRun"?: string,
+  "time"?: number,
+  "meter"?: number
 }
 
 
 export const getArrivalList = async (stationName: string): Promise<RealtimeStationArrival> => {
   const apiKey = process.env.REACT_APP_SEOUL_SUBWAY_API_KEY;
   const baseURL = `http://swopenapi.seoul.go.kr/api/subway/${apiKey}/json/realtimeStationArrival/0/10/`
+  // if (true) return dummy;
+
   const res = await fetch(baseURL + stationName);
   if (res.ok) {
     return await res.json();

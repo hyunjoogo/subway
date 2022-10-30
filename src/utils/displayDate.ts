@@ -22,6 +22,9 @@ export const now = () => {
 export const convertMinuteAndSecond = (value: string) => {
   const minute = Math.floor(Number(value) / 60);
   const second = Number(value) % 60;
+  if (minute === 0) {
+    return `${second}초`
+  }
   if (second === 0) {
     return `${minute}분`
   } else {

@@ -1,11 +1,7 @@
 import React from 'react';
 
 const Table = ({arrivalList = []})=> {
-  arrivalList = arrivalList.filter((value, index) => {
-    if (value.subwayId === "1009") {
-      return value
-    }
-  })
+
   return (
     <table>
       <caption>
